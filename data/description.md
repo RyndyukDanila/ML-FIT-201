@@ -26,7 +26,7 @@ The two databases were stored in tens of individual spreadsheets, under distinct
 1. X - x-axis spatial coordinate within the Montesinho park map: 1 to 9
 2. Y - y-axis spatial coordinate within the Montesinho park map: 2 to 9
 
-	>Пространственное расположение в сетке 9×9 природного парка Монтесинью (природный заповедник в Португалии); категориальнай признак
+	>Пространственное расположение в сетке 9×9 природного парка Монтесинью (природный заповедник в Португалии); координаты
 
 3. month - month of the year: "jan" to "dec" 
 
@@ -71,3 +71,93 @@ The two databases were stored in tens of individual spreadsheets, under distinct
 	>Целевой признак — сгоревшая площадь леса в гектарах (1га = 10 000 м²); вещественный признак
 
 (this output variable is very skewed towards 0.0, thus it may make sense to model with the logarithm transform).
+
+
+
+# Классификация (classification)
+
+### Источник (ссылка).
+>[Музыкальный жанр](https://www.kaggle.com/vicsuperman/prediction-of-music-genre)
+
+### Краткое описание: о чём они, как получены, связанные публикации (если есть).
+>The Spotify Web API provides artist, album, and track data, as well as audio features and analysis.
+>>Веб-API Spotify предоставляет данные об исполнителях, альбомах и дорожках, а также аудио особенности и анализ.
+
+### Суть задачи, целевой признак
+>A classification task, where the aim is to predict the music genre using Spotify's wide library of tracks and their audio features.
+>>Задача классификации, целью которой является прогнозирование музыкального жанра с использованием широкой библиотекой треков Spotify и их аудио особенностей.
+
+>Целевой признак — музыкальный жанр
+
+### Признаки объектов, описание этих признаков, тип.
+1. instance_id - unique ID for each music
+
+	>Уникальный ID для каждого трека; вещественный признак
+
+2. artist_name - artist name
+
+	>Имя артиста; текст
+
+3. track_name - track name
+
+	>Название трека; текст
+
+4. popularity - how popular of this music
+
+	>Популярность, насколько популярна музыка; вещественный признак
+
+5. acousticness - acousticness
+
+	>Акустичность - чем выше значение, тем акустичнее песня; вещественный признак
+
+6. danceability - danceability
+
+	>Танцевальность, чем выше значение, тем танцевальней музыка; вещественный признак
+
+7. duration_ms - the duration of the music in ms
+
+	>Длительность, в миллисекундах; вещественный признак
+
+8. energy - energy
+
+	>Энергичность - чем выше значение, тем энергичнее песня; вещественный признак
+
+9. instrumentalness - instrumentalness
+
+	>Инструментальность - богатсво аранжировки, чем больше значение, тем больше инструментов в треке; вещественный признак
+
+10. key - music key
+
+	>Музыкальный ключ - знак музыкальной нотации, определяющий звуковысотное значение нот.; порядковый признак
+
+11. liveness - liveness
+
+	>Живость - вероятность того, что трек был записан на живую; вещественный признак
+
+12. loudness - loudness
+
+	>Громкость - чем выше значение, тем громче музыка; вещественный признак
+
+13. mode - mode
+
+	>Тональность - мажорная или минорная; бинарный признак
+
+14. speechiness - speechiness
+
+	>Речь - определяет наличие произносимых слов в треке, чем выше значение, тем больше слов в треке; вещественный признак
+
+15. tempo - tempo
+
+	>Темп - показатель, определяющий скорость исполнения или воспроизведения композиции. BPM — это количество четвертных нот в минуту; вещественный признак;
+
+16. obtained_date - date
+
+	>Дата - число и месяц; порядковый признак
+
+17. valence - valence
+
+	>Валентность - чем выше значение, тем более позитивное настроение у песни; вещественный признак
+
+18. music_genre - music genre
+
+	>Целевой признак - музыкальный жанр (11 значений); категориальный признак
