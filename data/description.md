@@ -30,11 +30,11 @@ The two databases were stored in tens of individual spreadsheets, under distinct
 
 3. month - month of the year: "jan" to "dec" 
 
-	>Месяц года, с января по декабрь; категориальный признак
+	>Месяц года, с января по декабрь; порядковый признак
 
 4. day - day of the week: "mon" to "sun"
 
-	>День недели, с понедельника по воскресенье; категориальный признак
+	>День недели, с понедельника по воскресенье; порядковый признак
 
 5. FFMC - FFMC index from the FWI system: 18.7 to 96.20
 
@@ -85,7 +85,7 @@ The two databases were stored in tens of individual spreadsheets, under distinct
 
 ### Суть задачи, целевой признак
 >A classification task, where the aim is to predict the music genre using Spotify's wide library of tracks and their audio features.
->>Задача классификации, целью которой является прогнозирование музыкального жанра с использованием широкой библиотекой треков Spotify и их аудио особенностей.
+>>Задача классификации, целью которой является прогнозирование музыкального жанра с использованием широкой библиотеки треков Spotify и их аудио особенностей.
 
 >Целевой признак — музыкальный жанр
 
@@ -128,7 +128,7 @@ The two databases were stored in tens of individual spreadsheets, under distinct
 
 10. key - music key
 
-	>Музыкальный ключ - знак музыкальной нотации, определяющий звуковысотное значение нот.; порядковый признак
+	>Тональность - в обозначении тональности указывается тоника (она же — основной тон тонического трезвучия); порядковый признак
 
 11. liveness - liveness
 
@@ -140,7 +140,7 @@ The two databases were stored in tens of individual spreadsheets, under distinct
 
 13. mode - mode
 
-	>Тональность - мажорная или минорная; бинарный признак
+	>Лад - мажорный или минорный; бинарный признак
 
 14. speechiness - speechiness
 
