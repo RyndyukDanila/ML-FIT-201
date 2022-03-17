@@ -174,3 +174,82 @@ class DTC(object):
 			self.print_tree(node['right'], depth+1)
 		else:
 			print('%s[%s]' % ((depth*' ', node)))
+
+
+
+class NB(object):
+	"""docstring for NB"""
+	def __init__(self):
+		pass
+
+	# Split the dataset by class values, returns a dictionary
+	def _separate_by_class(self, dataset):
+		separated = dict()
+		for i in range(len(dataset)):
+			vector = dataset[i]
+			class_value = vector[-1]
+			if (class_value not in separated):
+				separated[class_value] = list()
+			separated[class_value].append(vector)
+		return separated
+
+	# Calculate the standard deviation of a list of numbers
+	def _stdev(self, numbers):
+		avg = np.mean(numbers)
+		variance = sum([(x-avg)**2 for x in numbers]) / float(len(numbers)-1)
+		return np.sqrt(variance)
+
+	# Calculate the mean, stdev and count for each column in a dataset
+	def _summarize_dataset(self, dataset):
+		summaries = [(np.mean(column), self._stdev(column), len(column)) for column in zip(*dataset)]
+		del(summaries[-1])
+		return summaries
+
+	# Split dataset by class then calculate statistics for each row
+	def _summarize_by_class(self, dataset):
+		separated = self._separate_by_class(dataset)
+		summaries = dict()
+		for class_value, rows in separated.items():
+			summaries[class_value] = self._summarize_dataset(rows)
+		return summaries
+
+	# Calculate the Gaussian probability distribution function for x
+	def _calculate_probability(self, x, mean, stdev):
+		exponent = np.exp(-((x-mean)**2 / (2 * stdev**2 )))
+		return (1 / (np.sqrt(2 * np.pi) * stdev)) * exponent
+
+	# Calculate the probabilities of predicting each class for a given row
+	def _calculate_class_probabilities(self, summaries, row):
+		total_rows = sum([summaries[label][0][2] for label in summaries])
+		probabilities = dict()
+		for class_value, class_summaries in summaries.items():
+			probabilities[class_value] = summaries[class_value][0][2]/float(total_rows)
+			for i in range(len(class_summaries)):
+				mean, stdev, count = class_summaries[i]
+				probabilities[class_value] *= self._calculate_probability(row[i], mean, stdev)
+		return probabilities
+
+	# Predict the class for a given row
+	def _prediction(self, summaries, row):
+		probabilities = self._calculate_class_probabilities(summaries, row)
+		best_label, best_prob = None, -1
+		for class_value, probability in probabilities.items():
+			if best_label is None or probability > best_prob:
+				best_prob = probability
+				best_label = class_value
+		return best_label
+
+	def fit(self, X):
+		self.summarize = self._summarize_by_class(X)
+
+	# Naive Bayes Algorithm
+	def predict(self, X):
+		predictions = list()
+		for row in X:
+			output = self._prediction(self.summarize, row)
+			predictions.append(output)
+		return predictions
+
+	
+ 
+			
