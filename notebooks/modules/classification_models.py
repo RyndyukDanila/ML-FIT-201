@@ -6,7 +6,6 @@ class KNN(object):
 	def __init__(self, k=1):
 		self.k = k;
 
-
 	@property
 	def k(self):
 		return self._k
@@ -17,12 +16,10 @@ class KNN(object):
 			raise ValueError("K cannot be negative.")
 		self._k = int(value)
 
-
 	def _mode(self, values):
 		vals, counts = np.unique(values, return_counts=True)
 		index = np.argmax(counts)
 		return vals[index]
-
 
 	def fit(self, X, y):
 		self.X = X
@@ -45,7 +42,6 @@ class DTC(object):
 		self.mnr = mnr # Minimum Node Records
 		self.tree = None
 
-
 	@property
 	def mtd(self):
 		return self._mtd
@@ -66,7 +62,6 @@ class DTC(object):
 			raise ValueError("Minimum Node Records cannot be negative.")
 		self._mnr = int(value)
 		
-
 	# Split a dataset based on an attribute and an attribute value
 	def _test_split(self, index, value, dataset):
 		left, right = list(), list()
@@ -139,12 +134,6 @@ class DTC(object):
 			node['right'] = self._get_split(right)
 			self._split(node['right'], max_depth, min_size, depth+1)
 	 
-	# Build a decision tree
-	def fit(self, data):
-		root = self._get_split(data)
-		self._split(root, self.mtd, self.mnr, 1)
-		self.tree = root
-
 	# Make a prediction with a decision tree
 	def _prediction(self, node, row):
 		if row[node['index']] < node['value']:
@@ -158,6 +147,12 @@ class DTC(object):
 			else:
 				return node['right']
 	 
+	# Build a decision tree
+	def fit(self, data):
+		root = self._get_split(data)
+		self._split(root, self.mtd, self.mnr, 1)
+		self.tree = root
+
 	# Classification and Regression Tree Algorithm
 	def predict(self, X):
 		predictions = list()
@@ -165,16 +160,6 @@ class DTC(object):
 			prediction = self._prediction(self.tree, row)
 			predictions.append(prediction)
 		return predictions
-	 
-	# Print a decision tree
-	def print_tree(self, node, depth=0):
-		if isinstance(node, dict):
-			print('%s[X%d < %.3f]' % ((depth*' ', (node['index']+1), node['value'])))
-			self.print_tree(node['left'], depth+1)
-			self.print_tree(node['right'], depth+1)
-		else:
-			print('%s[%s]' % ((depth*' ', node)))
-
 
 
 class NB(object):
@@ -249,7 +234,3 @@ class NB(object):
 			output = self._prediction(self.summarize, row)
 			predictions.append(output)
 		return predictions
-
-	
- 
-			
